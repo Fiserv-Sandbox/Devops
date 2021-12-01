@@ -6,7 +6,7 @@ on:
 jobs:
   call_bump:
     #uses: cornbuddy/github-reusable-workflows/.github/workflows/_bump-version.yml@develop
-    uses: .github/workflows/main_sample-spring-app.yml@main
+    uses: .github/workflows/main_sample-spring-app.yml@checkout
     secrets:
       github_token: ${{ secrets.GITHUB_TOKEN }}
 
