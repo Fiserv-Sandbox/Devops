@@ -1,4 +1,4 @@
-#File to run terraform 
+#File to run terraform scripts
 name: 'Terraform'
 
 on:
