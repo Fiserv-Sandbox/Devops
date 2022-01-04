@@ -1,4 +1,4 @@
-#File to run terraform scripts on azure  01/4/2022
+#File to run terraform scripts on azure  01/4/2022   
 name: 'Terraform'
 
 on:
