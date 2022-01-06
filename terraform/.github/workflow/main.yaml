@@ -1,22 +1,50 @@
 #--File to run terraform scripts on azure  01/4/2022   
-name: 'Terraform'
+
+# File: .github/workflows/workflow.yml Azure web app deployment Testing on 12/8/2021 ran again on 1/5/2021
+name: AzureLoginSample
 
 on:
   push:
     branches:
     - main
-  pull_request:
+  on: [push]
+
+#name: AzureLoginSample
 
 jobs:
-  terraform:
-    name: 'Terraform'
-    env:
-      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-      #ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+
+  build-and-deploy:
     runs-on: ubuntu-latest
-    environment: dev
+    steps:
+    
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.ARM_AZURE_CREDENTIALS }}
+    
+    - run: |
+        az webapp list --query "[?state=='Running']"
+        terraform -version 
+        terraform init
+        terraform plan 
+  
+#name: 'Terraform'
+
+#on:
+  #push:
+    #branches:
+    #- main
+  #pull_request:
+
+#jobs:
+  #terraform:
+    #name: 'Terraform'
+    #env:
+      #ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      #ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      #ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      #ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+    #runs-on: ubuntu-latest
+    #environment: dev
 
     defaults:
       run:
