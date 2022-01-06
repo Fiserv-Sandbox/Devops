@@ -1,38 +1,33 @@
-# This is a basic workflow to help you get started with Actions
-#File to run terraform scripts on azure  01/5/2022  tt  
-name: 'Terraform'
+#--File to run terraform scripts on azure  01/4/2022   
+
+# File: .github/workflows/workflow.yml Azure web app deployment Testing on 12/8/2021 ran again on 1/5/2021
+name: AzureLoginSample
 
 on:
   push:
     branches:
     - main
-  pull_request:
+  on: [push]
+
+#name: AzureLoginSample
 
 jobs:
-  terraform:
-    name: 'Terraform'
-    env:
-      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-      #ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+
+  build-and-deploy:
     runs-on: ubuntu-latest
-    environment: dev
-
-    defaults:
-      run:
-        shell: bash
-
     steps:
+    
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.ARM_AZURE_CREDENTIALS }}
     - name: Checkout
       uses: actions/checkout@v2
-
-    - name: 'Terraform Format'
-      uses: hashicorp/terraform-github-actions@master
+        - name:'Terraform Format'
+     # uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'fmt'
-        tf_actions_working_dir: "./terraform"
+        tf_actions_working_dir: "./terraform" 
         
     - name: 'Terraform Init'
       uses: hashicorp/terraform-github-actions@master
@@ -62,3 +57,12 @@ jobs:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'apply'
         tf_actions_working_dir: "./terraform"
+
+    
+    - run: |
+        az webapp list --query "[?state=='Running']"
+        terraform -version 
+        pwd
+        #terraform init
+        #terraform plan 
+  
