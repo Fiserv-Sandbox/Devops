@@ -24,8 +24,9 @@ jobs:
     - run: |
         az webapp list --query "[?state=='Running']"
         terraform -version 
-        terraform init
-        terraform plan 
+        pwd
+        #terraform init
+        #terraform plan 
   
 #name: 'Terraform'
 
