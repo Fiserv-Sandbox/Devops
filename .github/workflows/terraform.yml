@@ -1,5 +1,5 @@
-#File to run terraform scripts on azure  01/4/2022  it
-name: 'Terraform'
+#File 1/6/2022 TESTING demo all test
+name: 'Terraform-all'
 
 on:
   push:
@@ -12,9 +12,9 @@ jobs:
     name: 'Terraform'
     env:
       ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-      #ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-     #ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
     runs-on: ubuntu-latest
     environment: dev
 
