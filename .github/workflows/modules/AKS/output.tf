@@ -1,37 +1,23 @@
-resource "google_container_cluster" "primary" {
-  name               = var.cluster
-  location           = var.zone
-  initial_node_count = 3
+output "cluster" {
+  value = google_container_cluster.primary.name
+}
 
-  master_auth {
-    username = ""
-    password = ""
+output "host" {
+  value     = google_container_cluster.primary.endpoint
+  sensitive = true
+}
 
-    client_certificate_config {
-      issue_client_certificate = false
-    }
-  }
+output "cluster_ca_certificate" {
+  value     = base64decode(google_container_cluster.primary.master_auth.0.cluster_ca_certificate)
+  sensitive = true
+}
 
-  node_config {
-    machine_type = var.machine_type
-    oauth_scopes = [
-      "https://www.googleapis.com/auth/logging.write",
-      "https://www.googleapis.com/auth/monitoring",
-    ]
+output "username" {
+  value     = google_container_cluster.primary.master_auth.0.username
+  sensitive = true
+}
 
-    metadata = {
-      disable-legacy-endpoints = "true"
-    }
-
-    labels = {
-      app = var.app_name
-    }
-
-    tags = ["app", var.app_name]
-  }
-
-  timeouts {
-    create = "30m"
-    update = "40m"
-  }
+output "password" {
+  value     = google_container_cluster.primary.master_auth.0.password
+  sensitive = true
 }
