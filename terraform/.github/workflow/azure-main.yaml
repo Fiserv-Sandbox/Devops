@@ -1,4 +1,4 @@
-#--File to run terraform scripts on azure  01/4/2022   
+#--File to run terraform scripts on azure  01/4/2022   hh
 
 # File: .github/workflows/workflow.yml Azure web app deployment Testing on 12/8/2021 ran again on 1/5/2021
 name: AzureLoginSample
