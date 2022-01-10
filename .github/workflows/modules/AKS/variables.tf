@@ -1,7 +1,27 @@
-variable "appId" {
-  description = "Azure Kubernetes Service Cluster service principal"
+variable "project" {
+  default = "cicd-workshops"
 }
 
-variable "password" {
-  description = "Azure Kubernetes Service Cluster password"
+variable "region" {
+  default = "us-east1"
+}
+
+variable "zone" {
+  default = "us-east1-d"
+}
+
+variable "cluster" {
+  default = "cicd-workshops"
+}
+
+variable "credentials" {
+  default = "~/.ssh/cicd_demo_gcp_creds.json"
+}
+
+variable "kubernetes_min_ver" {
+  default = "latest"
+}
+
+variable "kubernetes_max_ver" {
+  default = "latest"
 }
