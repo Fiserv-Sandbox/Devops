@@ -1,14 +1,14 @@
 terraform {
   required_version = "~>0.12"
   backend "remote" {
-    organization = "datapunks"
+    organization = "fiserv"
     workspaces {
       name = "iac_gke_cluster"
     }
   }
 }
 
-resource "google_container_cluster" "primary" {
+resource "fiserv_container_cluster" "primary" {
   name               = var.cluster
   location           = var.zone
   initial_node_count = 3
